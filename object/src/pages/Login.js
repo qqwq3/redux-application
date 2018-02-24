@@ -26,20 +26,27 @@ class Login extends Component<{}> {
         }
         return true;
     }
-    render() {
+    _tips(){
         let tips;
-        if (this.props.status === 'init')
+        const { status,isSuccess } = this.props;
+
+        if (status === 'init')
         {
             tips = '请点击登录';
         }
-        else if (this.props.status === 'doing')
+        else if (status === 'doing')
         {
             tips = '正在登录...';
         }
-        else if (this.props.status === 'done' && !this.props.isSuccess)
+        else if (status === 'done' && !isSuccess)
         {
             tips = '登录失败, 请重新登录';
         }
+
+        return tips;
+    }
+    render() {
+        let tips = this._tips();
 
         return (
             <View style={styles.container}>
@@ -118,13 +125,13 @@ class Login extends Component<{}> {
     }
 }
 
-function select(store){
+const select = (store) => {
     return {
         status: store.loginIn.status,
         isSuccess: store.loginIn.isSuccess,
         user: store.loginIn.user
     };
-}
+};
 
 export default connect(select)(Login);
 
@@ -149,7 +156,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 4,
         overflow: 'hidden',
-        marginTop: 30
+        marginTop: 30,
+        // backgroundColor: '#ececec'
     },
     loginText:{
         fontSize:16,

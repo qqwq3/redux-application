@@ -6,9 +6,10 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import Navgator from '../routers/routers';
-import configureStore from '../store/store';
+import { store } from '../store/store';
+// import configureStore from '../store/store';
 
-let store = configureStore();
+//let store = configureStore();
 
 class App extends Component<{}>{
     render(){

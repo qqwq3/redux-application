@@ -1,25 +1,28 @@
 
 import { createStore,applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import reducers from '../reducers/reducers';
 
 // 用reducer来创建store
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware,logger)(createStore);
+// const createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore);
+//
+// // let isDebugChrome = __DEV__ && !!window.navigator.userAgent;
+//
+// function configStore(initialState){
+//     const store = createStoreWithMiddleware(reducers,initialState);
+//
+//     // if(isDebugChrome){
+//     //     window.store = store;
+//     // }
+//
+//     return store;
+// }
+//
+// export default configStore;
 
-let isDebugChrome = __DEV__ && !!window.navigator.userAgent;
+export const store = createStore(reducers,applyMiddleware(thunk,logger));
 
-function configStore(initialState){
-    const store = createStoreWithMiddleware(reducers,initialState);
-
-    if(isDebugChrome){
-        window.store = store;
-    }
-
-    return store;
-}
-
-export default configStore;
 
 
 
